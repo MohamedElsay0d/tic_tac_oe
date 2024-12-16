@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:tic_tac_oe/board_item.dart';
 
 class GameBoard extends StatelessWidget {
   const GameBoard({super.key});
@@ -62,18 +65,7 @@ class GameBoard extends StatelessWidget {
                     mainAxisExtent: MediaQuery.of(context).size.height * 0.23,
                   ),
                   itemCount: 9,
-                  itemBuilder: (context, index) => Container(
-                    color: const Color(0xffffffff),
-                    alignment: Alignment.center,
-                    child: const Text(
-                      'X',
-                      style: TextStyle(
-                        fontSize: 85,
-                        fontWeight: FontWeight.w900,
-                        color: Color(0xffF54D62),
-                      ),
-                    ),
-                  ),
+                  itemBuilder: (context, index) => const BoardItem()
                 ),
               ),
             ],
