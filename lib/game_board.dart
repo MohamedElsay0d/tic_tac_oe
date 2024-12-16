@@ -11,9 +11,10 @@ class GameBoard extends StatefulWidget {
 }
 
 class _GameBoardState extends State<GameBoard> {
-  final List items = List.filled(9, '');
+  List items = List.filled(9, '');
   int round = 1;
   String player = 'X';
+  String txt = 'player 1' ;
 
   @override
   Widget build(BuildContext context) {
@@ -51,9 +52,9 @@ class _GameBoardState extends State<GameBoard> {
                   ),
                 ),
               ),
-              const Text(
-                'Player 1 turn',
-                style: TextStyle(
+               Text(
+                '$txt turn',
+                style:const TextStyle(
                     fontSize: 36,
                     color: Colors.white,
                     fontWeight: FontWeight.w700),
@@ -98,7 +99,9 @@ class _GameBoardState extends State<GameBoard> {
                                       ],
                                     ),
                                   );
+                                  items = List.filled(9, '');
                                 }
+                                txt = 'Player 2';
                               } else {
                                 items[index] == ''
                                     ? items[index] = player == 'X' ? 'O' : 'X'
@@ -118,7 +121,9 @@ class _GameBoardState extends State<GameBoard> {
                                       ],
                                     ),
                                   );
+                                  items = List.filled(9, '');
                                 }
+                                txt = 'Player 1';
                               }
                               round++;
                             });
