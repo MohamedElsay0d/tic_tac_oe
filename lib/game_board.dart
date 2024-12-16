@@ -91,32 +91,28 @@ class _GameBoardState extends State<GameBoard> {
                           text: items[index],
                           index: index,
                           onClick: (index) {
-                            if (round % 2 != 0) {
-                              items[index] == ''
-                                  ? items[index] = player
-                                  : items[index] = '';
-                              if (checkWin(items[index])) {
-                                player1scor++;
+                            if (items[index] == '') {
+                              items[index] = player;
+                              if (checkWin(player)) {
+                                if (player == 'X') {
+                                  player1scor++;
+                                } else {
+                                  player2score++;
+                                }
                                 items = List.filled(9, '');
                                 round = 1;
+                                txt = 'Player 1';
+                              } else {
+                                player = (player == 'X') ? 'O' : 'X';
+                                txt = (player == 'X') ? 'Player 1' : 'Player 2';
+                                round++;
                               }
-                              txt = 'Player 2';
-                            } else {
-                              items[index] == ''
-                                  ? items[index] = player == 'X' ? 'O' : 'X'
-                                  : items[index] = '';
-                              if (checkWin(items[index])) {
-                                player2score++;
+                              if (round == 10) {
                                 items = List.filled(9, '');
+                                txt = 'Player 1';
+                                player = 'X';
                                 round = 1;
                               }
-                              txt = 'Player 1';
-                            }
-                            round++;
-                            if (round == 10) {
-                              items = List.filled(9, '');
-                              txt = 'Player 1';
-                              round = 1;
                             }
                             setState(() {});
                           },
