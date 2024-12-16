@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:tic_tac_oe/board_item.dart';
 
@@ -93,32 +91,34 @@ class _GameBoardState extends State<GameBoard> {
                           text: items[index],
                           index: index,
                           onClick: (index) {
-                              if (round % 2 != 0) {
-                                items[index] == ''
-                                    ? items[index] = player
-                                    : items[index] = '';
-                                if (checkWin(items[index])) {
-                                  player1scor++;
-                                  items = List.filled(9, '');
-                                }
-                                txt = 'Player 2';
-                              } else {
-                                items[index] == ''
-                                    ? items[index] = player == 'X' ? 'O' : 'X'
-                                    : items[index] = '';
-                                if (checkWin(items[index])) {
-                                  player2score++;
-                                  items = List.filled(9, '');
-                                }
-                                txt = 'Player 1';
-                              }
-                              round++;
-                              if (round == 10) {
+                            if (round % 2 != 0) {
+                              items[index] == ''
+                                  ? items[index] = player
+                                  : items[index] = '';
+                              if (checkWin(items[index])) {
+                                player1scor++;
                                 items = List.filled(9, '');
-                                txt = 'Player 1';
                                 round = 1;
                               }
-                              setState(() {});
+                              txt = 'Player 2';
+                            } else {
+                              items[index] == ''
+                                  ? items[index] = player == 'X' ? 'O' : 'X'
+                                  : items[index] = '';
+                              if (checkWin(items[index])) {
+                                player2score++;
+                                items = List.filled(9, '');
+                                round = 1;
+                              }
+                              txt = 'Player 1';
+                            }
+                            round++;
+                            if (round == 10) {
+                              items = List.filled(9, '');
+                              txt = 'Player 1';
+                              round = 1;
+                            }
+                            setState(() {});
                           },
                         )),
               ),
