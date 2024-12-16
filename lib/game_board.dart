@@ -3,7 +3,7 @@ import 'package:tic_tac_oe/board_item.dart';
 
 class GameBoard extends StatefulWidget {
   GameBoard({super.key});
-
+  static const String routeName = '/gameboard';
   @override
   State<GameBoard> createState() => _GameBoardState();
 }
@@ -15,6 +15,7 @@ class _GameBoardState extends State<GameBoard> {
   String txt = 'player 1';
   int player1scor = 0;
   int player2score = 0;
+  static const String routeName = '/welcome';
 
   @override
   Widget build(BuildContext context) {
@@ -101,15 +102,15 @@ class _GameBoardState extends State<GameBoard> {
                                 }
                                 items = List.filled(9, '');
                                 round = 1;
-                                txt = 'Player 1';
+                                txt = 'Player O';
                               } else {
                                 player = (player == 'X') ? 'O' : 'X';
-                                txt = (player == 'X') ? 'Player 1' : 'Player 2';
+                                txt = (player == 'X') ? 'Player X' : 'Player O';
                                 round++;
                               }
                               if (round == 10) {
                                 items = List.filled(9, '');
-                                txt = 'Player 1';
+                                txt = 'Player X';
                                 player = 'X';
                                 round = 1;
                               }

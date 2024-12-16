@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tic_tac_oe/game_board.dart';
+import 'package:tic_tac_oe/welcome_screen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -10,9 +11,13 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: GameBoard()
+      initialRoute: WelcomeScreen.routeName, 
+      routes: {
+        WelcomeScreen.routeName: (context) => const WelcomeScreen(),
+        GameBoard.routeName: (context) => GameBoard(),
+      },
     );
   }
 }
