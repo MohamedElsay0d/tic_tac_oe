@@ -14,7 +14,9 @@ class _GameBoardState extends State<GameBoard> {
   List items = List.filled(9, '');
   int round = 1;
   String player = 'X';
-  String txt = 'player 1' ;
+  String txt = 'player 1';
+  int player1scor = 0;
+  int player2score = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -42,19 +44,31 @@ class _GameBoardState extends State<GameBoard> {
                   color: Color(0xffffffff),
                   borderRadius: BorderRadius.all(Radius.circular(44)),
                 ),
-                child: const Center(
-                  child: Text(
-                    '00:05',
-                    style: TextStyle(
-                        fontSize: 32,
-                        color: Color(0xff000000),
-                        fontWeight: FontWeight.w600),
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        'X: $player1scor',
+                        style: const TextStyle(
+                            fontSize: 32,
+                            color: Color(0xff000000),
+                            fontWeight: FontWeight.w600),
+                      ),
+                      Text(
+                        'O: $player2score',
+                        style: const TextStyle(
+                            fontSize: 32,
+                            color: Color(0xff000000),
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ],
                   ),
                 ),
               ),
-               Text(
+              Text(
                 '$txt turn',
-                style:const TextStyle(
+                style: const TextStyle(
                     fontSize: 36,
                     color: Colors.white,
                     fontWeight: FontWeight.w700),
@@ -79,26 +93,12 @@ class _GameBoardState extends State<GameBoard> {
                           text: items[index],
                           index: index,
                           onClick: (index) {
-                            setState(() {
                               if (round % 2 != 0) {
                                 items[index] == ''
                                     ? items[index] = player
                                     : items[index] = '';
                                 if (checkWin(items[index])) {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) => AlertDialog(
-                                      title: const Text('Player 1 win'),
-                                      actions: [
-                                        TextButton(
-                                          child: const Text('Close'),
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                        )
-                                      ],
-                                    ),
-                                  );
+                                  player1scor++;
                                   items = List.filled(9, '');
                                 }
                                 txt = 'Player 2';
@@ -107,26 +107,18 @@ class _GameBoardState extends State<GameBoard> {
                                     ? items[index] = player == 'X' ? 'O' : 'X'
                                     : items[index] = '';
                                 if (checkWin(items[index])) {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) => AlertDialog(
-                                      title: const Text('Player 2 win'),
-                                      actions: [
-                                        TextButton(
-                                          child: const Text('Close'),
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                        )
-                                      ],
-                                    ),
-                                  );
+                                  player2score++;
                                   items = List.filled(9, '');
                                 }
                                 txt = 'Player 1';
                               }
                               round++;
-                            });
+                              if (round == 10) {
+                                items = List.filled(9, '');
+                                txt = 'Player 1';
+                                round = 1;
+                              }
+                              setState(() {});
                           },
                         )),
               ),
