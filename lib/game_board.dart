@@ -15,7 +15,6 @@ class _GameBoardState extends State<GameBoard> {
   String txt = 'player 1';
   int player1scor = 0;
   int player2score = 0;
-  static const String routeName = '/welcome';
 
   @override
   Widget build(BuildContext context) {
